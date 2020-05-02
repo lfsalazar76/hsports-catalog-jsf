@@ -9,20 +9,28 @@
 	    <ui:define name="body">
 		<h:form>
 			<div>
-			    <p>
-				<h:outputLabel value="Product Name" />
-				<h:inputText value="#{catalogItemFormBean.name}"/>
-				</p>
-				<p>
-				<h:outputLabel value="Product Manufacturer" />
-				<h:inputText value="#{catalogItemFormBean.manufacturer}"/>
-				</p>
-				<p>
-				<h:outputLabel value="Product sku" />
-				<h:inputText value="#{catalogItemFormBean.sku}"/>
-				</p>
+				<h:outputLabel value="Product Name:" />
+				<h:inputText id="productName" value="#{catalogItemFormBean.item.name}">
+				  <f:validateRegex pattern="[A-Za-z0-9]+"></f:validateRegex>
+				</h:inputText>
+				<h:message for="productName" />
 			</div>
-			<h:commandButton action="list" value="Submit" />
+			<div>
+				<h:outputLabel value="Manufacturer" />
+				<h:inputText value="#{catalogItemFormBean.item.manufacturer}"></h:inputText>
+			</div>
+			<div>
+				<h:outputLabel value="Available Date" />
+				<h:inputText value="#{catalogItemFormBean.item.availableDate}">
+				  <f:convertDateTime id="availableDate" type="localDate" pattern="dd-MM-yyyy"/>
+				</h:inputText>
+				<h:message for="availableDate" />
+			</div>
+			<div>
+				<h:outputLabel value="Description" />
+				<h:inputTextarea value="#{catalogItemFormBean.item.description}"></h:inputTextarea>
+			</div>
+			<h:commandButton value="Submit" action="#{catalogItemFormBean.addItem()}"/>
 		</h:form>
 		</ui:define>
 	</ui:composition>
